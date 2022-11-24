@@ -1,38 +1,104 @@
-.App {
-  text-align: center;
+*{
+  padding:0;
+  margin:0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background-color: #e5e5f7;
+  background-image:  linear-gradient(135deg, #4c98e5 25%, transparent 25%), linear-gradient(225deg, #4c98e5 25%, transparent 25%), linear-gradient(45deg, #4c98e5 25%, transparent 25%), linear-gradient(315deg, #4c98e5 25%, #e5e5f7 25%);
+  background-position:  40px 0, 40px 0, 0 0, 0 0;
+  background-size: 40px 40px;
+  background-repeat: repeat;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-input-container{
   display: flex;
+  font-family: "Playfair Display";
+  width: 50vw;
+  background-color:#e5e5f7;
+  border: 1px solid black;
+}
+
+.app-title{
+  padding: 5px;
+  background-color:#e5e5f7;
+}
+
+.input-container{
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+
+.input-wrapper{
+  position: relative;
+  display:flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 50vh;
+  border: 1px solid black;
 }
 
-.App-link {
-  color: #61dafb;
+.searchbar-input{
+  border-radius: 20px;
+  padding: 5px;
+  width: 20vw; 
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.modal-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  font-family: 'Source Sans Pro';
+}
+
+.current-weather-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color:#e5e5f7;
+  border: 1px solid black;
+}
+
+.icon-and-temp{
+ display: flex;
+ align-items: center;
+}
+
+.three-hours-forecast-container{
+  display: flex;
+  margin-top: 5px;
+  flex-direction: column;
+  align-items: center;
+  background-color:#e5e5f7;
+}
+
+.forecast-icon-and-temp{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.three-days-forecast-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  background-color:#eaeaf398; 
+  border: 1px solid black;
+}
+
+.three-day-forecast-item{
+  display: flex;
+  margin-top: 5px;
+  padding: 5px;
+  width: 34vw;
+  align-items: center;
+  background-color:#e5e5f7; 
+  border: 1px solid black;
 }
