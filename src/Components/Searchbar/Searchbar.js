@@ -3,7 +3,6 @@ import WeatherModal from "./WeatherModal";
 
 function Searchbar(){
 
-
     const [isOpen, setIsOpen] = useState(false); 
     const [result, setResult] = useState("");
     const [lat, setLat] = useState("");
@@ -15,7 +14,6 @@ function Searchbar(){
     function searchbarHandler(){
         const inputValue = searchRef.current.value;
         setResult(inputValue);
-        
     };
 
     function tempSwitchHandler(){
@@ -41,7 +39,6 @@ function Searchbar(){
         catch(error){
             console.log(error);
         };
-
         setResult("");
     };
 
@@ -54,8 +51,12 @@ function Searchbar(){
             <div className="input-wrapper">
                 <div className="header-input-container">
                     <div className="app-title">
-                            <h1>Tomas Pereira's</h1>
-                            <h1>Weather App</h1>
+                            <div className="title-text">
+                                <h1>Tomas Pereira's</h1>
+                            </div>
+                            <div className="title-text">
+                                <h1>Weather App</h1>    
+                            </div> 
                     </div>
                     <div className="input-container">
                         <input placeholder="Write a city" className="searchbar-input" ref={searchRef} onChange={searchbarHandler}/>

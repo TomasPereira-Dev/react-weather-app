@@ -19,6 +19,7 @@ body{
   width: 50vw;
   background-color:#e5e5f7;
   border: 1px solid black;
+  font-size: 1.5em;
 }
 
 .app-title{
@@ -102,3 +103,54 @@ body{
   background-color:#e5e5f7; 
   border: 1px solid black;
 }
+
+/*MEDIA QUERIES*/
+
+@media (max-width: 1024px){
+  .header-input-container{
+    font-size: 1em;
+    width: 65vw;
+  }
+}
+
+@media (max-width: 425px){
+  .header-input-container{
+    width: 100vw;
+    font-size: 0.7em;
+  }
+  
+  .searchbar-input{
+    width: 35vw;
+  }
+
+  .three-day-forecast-item{
+    width: 75vw;
+  }
+
+  .current-weather-container{
+    font-size: 0.7em;
+  }
+
+}
+
+@media (max-width: 320px){
+  .header-input-container{
+    width: 100vw;
+    font-size: 0.6em;
+  }
+
+  .searchbar-input{
+    width: 30vw;
+  }
+
+  .input-container{
+    width: 100vw;
+  }
+
+  .three-day-forecast-item{
+    width: 80vw;
+  }
+
+}
+
+
