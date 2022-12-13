@@ -23,7 +23,9 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
     const today = new Date();
     const utcTimeHours = today.getUTCHours();
     const utcTimeMinutes =  today.getUTCMinutes(); //universal time doesn´t change the minutes, only hours
-    const hours = utcTimeHours + (time / 3600);
+    let hours = utcTimeHours + (time / 3600);
+
+
 
 
     async function weatherFetch(){
@@ -42,7 +44,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
             console.log(error);
         };
     };
-    
+    console.log(time)
     async function forecastFetch(){
         try{
             await fetch (forecastFetchUrl)
@@ -58,6 +60,18 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
             console.log(error);
         };
     };
+
+    if(hours < 0){
+      hours = (hours + time) * -1;
+    }
+
+    if(hours > 24){
+        hours = hours - 24;
+    }
+
+    if(hours < 10){
+        hours = `0` + hours;
+    }
 
     useEffect(() => {
         weatherFetch();
