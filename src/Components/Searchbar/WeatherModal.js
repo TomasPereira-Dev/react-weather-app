@@ -22,7 +22,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
 
     const today = new Date();
     const utcTimeHours = today.getUTCHours();
-    const utcTimeMinutes =  today.getUTCMinutes(); //universal time doesn´t change the minutes, only hours
+    let utcTimeMinutes =  today.getUTCMinutes(); //universal time doesn´t change the minutes, only hours
     let hours = utcTimeHours + (time / 3600);
 
 
@@ -44,7 +44,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
             console.log(error);
         };
     };
-    console.log(time)
+    
     async function forecastFetch(){
         try{
             await fetch (forecastFetchUrl)
@@ -55,6 +55,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
                 setMaxMin([Math.round(data.list[0].main.temp_max), Math.round(data.list[0].main.temp_min)]);
                 setForecastWeather(data.list[0].weather[0].main);
             });
+
         }
         catch(error){
             console.log(error);
@@ -63,27 +64,33 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
 
     if(hours < 0){
       hours = (hours + time) * -1;
-    }
+    };
 
     if(hours > 24){
         hours = hours - 24;
-    }
+    };
 
     if(hours < 10){
         hours = `0` + hours;
-    }
+    };
+
+    if(utcTimeMinutes < 10){
+        utcTimeMinutes = `0` + utcTimeMinutes;
+    };
 
     useEffect(() => {
         weatherFetch();
         forecastFetch();
     }, [lat]);
 
+    console.log(forecast)
     if(forecast){
         for(let i = 0; i < forecast.length; i++){
+            console.log(forecast[i].dt_txt)
             if(regex.test(forecast[i].dt_txt)){
                 threeDayForecast.push(forecast[i]);
                 i++
-            }else{
+            }else if(!forecast[i].dt_txt){
                 i++
             };
         };
@@ -100,6 +107,8 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
         </div>
         </>
     };
+
+    console.log(threeDayForecast)
 
     return( 
         <>
