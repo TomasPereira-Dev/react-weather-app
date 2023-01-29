@@ -106,6 +106,7 @@ body{
   padding: 5px;
   width: 34vw;
   align-items: center;
+  justify-content: space-around;
   background-color:#e5e5f7; 
   border: 1px solid black;
 }
