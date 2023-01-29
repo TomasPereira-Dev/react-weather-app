@@ -4,12 +4,13 @@
   box-sizing: border-box;
 }
 
+button{
+  border: none;
+}
+
 body{
-  background-color: #e5e5f7;
-  background-image:  linear-gradient(135deg, #4c98e5 25%, transparent 25%), linear-gradient(225deg, #4c98e5 25%, transparent 25%), linear-gradient(45deg, #4c98e5 25%, transparent 25%), linear-gradient(315deg, #4c98e5 25%, #e5e5f7 25%);
-  background-position:  40px 0, 40px 0, 0 0, 0 0;
-  background-size: 40px 40px;
-  background-repeat: repeat;
+  background-color: #ffd1dc;
+
 }
 
 
@@ -20,6 +21,12 @@ body{
   background-color:#e5e5f7;
   border: 1px solid black;
   font-size: 1.5em;
+}
+
+.search-btn{
+  border-radius: 50%;
+  border: 2px solid black;
+  padding: 8px;
 }
 
 .app-title{

@@ -25,9 +25,6 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
     let utcTimeMinutes =  today.getUTCMinutes(); //universal time doesn´t change the minutes, only hours
     let hours = utcTimeHours + (time / 3600);
 
-
-
-
     async function weatherFetch(){
         try{
             await fetch(weatherFetchUrl)
@@ -83,10 +80,8 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
         forecastFetch();
     }, [lat]);
 
-    console.log(forecast)
     if(forecast){
         for(let i = 0; i < forecast.length; i++){
-            console.log(forecast[i].dt_txt)
             if(regex.test(forecast[i].dt_txt)){
                 threeDayForecast.push(forecast[i]);
                 i++
@@ -108,8 +103,6 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
         </>
     };
 
-    console.log(threeDayForecast)
-
     return( 
         <>
         <div className="modal-wrapper">
@@ -125,9 +118,9 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
             </div>
             <div className="three-hours-forecast-container">
                 <div className="forecast-icon-and-temp ">
-                        <h2>weather for the next 3 hours</h2>
-                        <img src={forecastIconUrl} alt="weather for the next 3 hours"/>
-                        <h2>{forecastWeather} {maxMin[0]}º max | {maxMin[1]}º min</h2>
+                    <h2>weather for the next 3 hours</h2>
+                    <img src={forecastIconUrl} alt="weather for the next 3 hours"/>
+                    <h2>{forecastWeather} {maxMin[0]}º max | {maxMin[1]}º min</h2>
                 </div>
             </div>
             <div className="three-days-forecast-container">

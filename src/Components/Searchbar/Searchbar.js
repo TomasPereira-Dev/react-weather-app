@@ -1,5 +1,7 @@
 import {React, useState, useEffect, useRef} from "react";
 import WeatherModal from "./WeatherModal";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 
 function Searchbar(){
 
@@ -31,9 +33,7 @@ function Searchbar(){
             .then((data) => {
                 setLat(data[0].lat);
                 setLon(data[0].lon);
-                console.log(lat, lon)
-                setIsOpen(true);
-                console.log(isOpen)
+                setIsOpen(true);  
             });
         }
         catch(error){
@@ -60,11 +60,10 @@ function Searchbar(){
                     </div>
                     <div className="input-container">
                         <input placeholder="Write a city" className="searchbar-input" ref={searchRef} onChange={searchbarHandler}/>
-                        <button type="button" ref={searchButtonRef} onClick={searchButtonHandler}>Search</button>
+                        <button className="search-btn" type="button" ref={searchButtonRef} onClick={searchButtonHandler}><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
                         <button onClick={tempSwitchHandler}>{tempUnits === "metric" ? "switch to Fahrenheit" : "Switch to Celsius"}</button>
                     </div>
                 </div> 
-
             </div>
              <WeatherModal isOpen={isOpen} lat={lat} lon={lon} tempUnits={tempUnits}/>
         </>
