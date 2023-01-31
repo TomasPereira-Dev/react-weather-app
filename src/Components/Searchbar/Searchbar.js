@@ -51,17 +51,21 @@ function Searchbar(){
             <div className="input-wrapper">
                 <div className="header-input-container">
                     <div className="app-title">
-                            <div className="title-text">
-                                <h1>Tomas Pereira's</h1>
-                            </div>
-                            <div className="title-text">
-                                <h1>Weather App</h1>    
-                            </div> 
+                        <div className="title-text">
+                            <h1>Tomas Pereira's</h1>
+                        </div>
+                        <div className="title-text">
+                            <h1>Weather App</h1>    
+                        </div> 
                     </div>
                     <div className="input-container">
                         <input placeholder="Write a city" className="searchbar-input" ref={searchRef} onChange={searchbarHandler}/>
                         <button className="search-btn" type="button" ref={searchButtonRef} onClick={searchButtonHandler}><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
-                        <button onClick={tempSwitchHandler}>{tempUnits === "metric" ? "switch to Fahrenheit" : "Switch to Celsius"}</button>
+                        {//<button onClick={tempSwitchHandler}>{tempUnits === "metric" ? "switch to Fahrenheit" : "Switch to Celsius"}</button> WILL BE CHANGED TO A DIV FOR DESIGN PROPUSES
+                        }
+                        <div className="switch-container">
+                            <input type="checkbox" className="switch-checkbox" onClick={tempSwitchHandler}/>
+                        </div>
                     </div>
                 </div> 
             </div>
