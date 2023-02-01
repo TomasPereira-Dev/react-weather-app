@@ -50,7 +50,7 @@ body{
   display: flex;
   font-family: "Playfair Display";
   width: 50vw;
-  background-color:#e5e5f7;
+  background-color:#e5e5f74d;
   border: 1px solid black;
   font-size: 1.5em;
 }
@@ -64,7 +64,6 @@ body{
 
 .app-title{
   padding: 5px;
-  background-color:#e5e5f7;
 }
 
 .input-container{
@@ -99,7 +98,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:#e5e5f7;
+  background-color: #e5e5f74d;
   border: 1px solid black;
 }
 
@@ -114,7 +113,7 @@ body{
   margin-top: 5px;
   flex-direction: column;
   align-items: center;
-  background-color:#e5e5f7;
+  background-color:#e5e5f74d;
 }
 
 .forecast-icon-and-temp{
@@ -129,7 +128,7 @@ body{
   flex-direction: column;
   align-items: center;
   margin-top: 5px;
-  background-color:#eaeaf398; 
+  background-color:#e5e5f74d; 
   border: 1px solid black;
 }
 
@@ -140,7 +139,6 @@ body{
   width: 34vw;
   align-items: center;
   justify-content: space-around;
-  background-color:#e5e5f7; 
   border: 1px solid black;
 }
 
