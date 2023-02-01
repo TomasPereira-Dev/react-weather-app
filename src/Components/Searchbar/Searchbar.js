@@ -28,7 +28,7 @@ function Searchbar(){
 
     async function searchButtonHandler(){
         try{
-            await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${result}&appid=f583d2e3612de8b62a858c176aa37575`)
+            await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${result}&appid=f583d2e3612de8b62a858c176aa37575`)
             .then((response) => response.json())
             .then((data) => {
                 setLat(data[0].lat);

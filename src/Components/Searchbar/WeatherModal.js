@@ -10,11 +10,11 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
     const [time, setTime] = useState("");
     const [weather, setWeather] = useState("");
     const [icon, setIcon] = useState("");
-    const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+    const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
     const [temp, setTemp] = useState("");
 
     const [forecastIcon, setForecastIcon] = useState("");
-    const forecastIconUrl = `http://openweathermap.org/img/wn/${forecastIcon}@2x.png`;
+    const forecastIconUrl = `https://openweathermap.org/img/wn/${forecastIcon}@2x.png`;
     const [forecastWeather, setForecastWeather] = useState("")
     const [maxMin, setMaxMin] = useState([null, null]);
     const [forecast, setForecast] = useState([]);
@@ -129,7 +129,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
                     return(
                     (<div className="three-day-forecast-item" key={index}>
                         <h2>{renderedWeather.dt_txt.split(regex)}</h2>
-                        <img src={`http://openweathermap.org/img/wn/${renderedWeather.weather[0].icon}@2x.png`} alt="forecastA"/>
+                        <img src={`https://openweathermap.org/img/wn/${renderedWeather.weather[0].icon}@2x.png`} alt="forecastA"/>
                         <h2>{renderedWeather.weather[0].main} {Math.round(renderedWeather.main.temp)}º</h2>
                     </div>)
                     )
