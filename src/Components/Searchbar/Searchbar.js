@@ -1,4 +1,5 @@
 import {React, useState, useRef} from "react";
+import axios from "axios";
 import WeatherModal from "./WeatherModal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
@@ -20,21 +21,18 @@ function Searchbar(){
         } 
     };
 
-    async function searchButtonHandler(){
+    const searchButtonHandler = async () =>{
         try{
-            await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchRef.current.value}&appid=f583d2e3612de8b62a858c176aa37575`)
-            .then((response) => response.json())
-            .then((data) => {
-                setLat(data[0].lat);
-                setLon(data[0].lon);
-                setIsOpen(true);  
-            });
+            const response  = await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${searchRef.current.value}&appid=f583d2e3612de8b62a858c176aa37575`);
+            setLat(response.data[0].lat);
+            setLon(response.data[0].lon);
+            setIsOpen(true);
         }
         catch(error){
-            console.log(error);
-        };
+            alert(error)
+        }
         searchRef.current.value = "";
-    };
+    }
 
     return(
         <>

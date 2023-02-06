@@ -1,4 +1,5 @@
 import {useEffect, useState, useCallback} from "react";
+import axios from "axios";
 
 function WeatherModal({isOpen, lat, lon, tempUnits}){
     
@@ -36,16 +37,13 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
     
     const weatherFetch = useCallback(async () => {
         try{
-            await fetch(weatherFetchUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                setFetchedData({
-                    city: `${data.name}, ${data.sys.country}`,
-                    time: data.timezone,
-                    weather: data.weather[0].main,
-                    temp: Math.round(data.main.temp),
-                    icon: data.weather[0].icon,
-                })
+            const response = await axios.get(weatherFetchUrl);
+            setFetchedData({
+                city: `${response.data.name}, ${response.data.sys.country}`,
+                time: response.data.timezone,
+                weather: response.data.weather[0].main,
+                temp: Math.round(response.data.main.temp),
+                icon: response.data.weather[0].icon
             })
         }
         catch(error){
@@ -53,24 +51,21 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
         };
     }, [weatherFetchUrl])
 
+    
     const forecastFetch = useCallback(async () => {
         try{
-            await fetch (forecastFetchUrl)
-            .then((response) => response.json())
-            .then ((data) => {
-                setFetchedForecastData({
-                    forecastIcon: data.list[0].weather[0].icon,
-                    forecastWeather: data.list[0].weather[0].main,
-                    maxMin: [Math.round(data.list[0].main.temp_max), Math.round(data.list[0].main.temp_min)],
-                    forecast: data.list,
-                });
+            const response = await axios.get(forecastFetchUrl);
+            setFetchedForecastData({
+                forecastIcon: response.data.list[0].weather[0].icon,
+                forecastWeather: response.data.list[0].weather[0].main,
+                maxMin: [Math.round(response.data.list[0].main.temp_max), Math.round(response.data.list[0].main.temp_min)],
+                forecast: response.data.list
             });
-
         }
         catch(error){
             console.log(error);
         };
-    }, [forecastFetchUrl])
+    }, [forecastFetchUrl]);
     
     if(hours < 0){
       hours = (hours + fetchedData.time) * -1;
@@ -91,7 +86,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
     useEffect(() => {
         weatherFetch();
         forecastFetch();
-    }, [weatherFetch, forecastFetch]); // <-- there is a bug, if useEffect don't have a dependency, when you click the temperature switch (switch to imperial or metric), it will switch back and forth between the 2 systems until react forces it to stop rerendering
+    }, [weatherFetch, forecastFetch]);
 
     if(fetchedForecastData.forecast){
         for(let i = 0; i < fetchedForecastData.forecast.length; i++){
