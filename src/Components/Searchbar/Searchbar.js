@@ -52,6 +52,7 @@ function Searchbar(){
                         <input placeholder="Write a city" className="searchbar-input" ref={searchRef}/>
                         <button className="search-btn" type="button" ref={searchButtonRef} onClick={searchButtonHandler}><FontAwesomeIcon icon={faMagnifyingGlass}/></button>
                         <div className="switch-container">
+                            <h2 className="switch-text">switch to Fahrenheit</h2>
                             <input type="checkbox" className="switch-checkbox" onClick={tempSwitchHandler}/>
                         </div>
                     </div>
