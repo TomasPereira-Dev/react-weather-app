@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 
 function WeatherModal({isOpen, lat, lon, tempUnits}){
     
@@ -33,7 +33,8 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
     let utcTimeMinutes =  today.getUTCMinutes(); //universal time doesn´t change the minutes, only hours
     let hours = utcTimeHours + (fetchedData.time / 3600);
 
-    async function weatherFetch(){
+    
+    const weatherFetch = useCallback(async () => {
         try{
             await fetch(weatherFetchUrl)
             .then((response) => response.json())
@@ -50,9 +51,9 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
         catch(error){
             console.log(error);
         };
-    };
-    
-    async function forecastFetch(){
+    }, [weatherFetchUrl])
+
+    const forecastFetch = useCallback(async () => {
         try{
             await fetch (forecastFetchUrl)
             .then((response) => response.json())
@@ -69,7 +70,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
         catch(error){
             console.log(error);
         };
-    };
+    }, [forecastFetchUrl])
     
     if(hours < 0){
       hours = (hours + fetchedData.time) * -1;
@@ -90,7 +91,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
     useEffect(() => {
         weatherFetch();
         forecastFetch();
-    }, [lat]);
+    }, [weatherFetch, forecastFetch]); // <-- there is a bug, if useEffect don't have a dependency, when you click the temperature switch (switch to imperial or metric), it will switch back and forth between the 2 systems until react forces it to stop rerendering
 
     if(fetchedForecastData.forecast){
         for(let i = 0; i < fetchedForecastData.forecast.length; i++){
