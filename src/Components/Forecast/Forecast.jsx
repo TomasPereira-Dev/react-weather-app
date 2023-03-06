@@ -1,8 +1,9 @@
-import {useEffect, useState, useCallback} from "react";
+import forecastStyles from "./forecastStyles.module.css";
+import {React, useState, useCallback, useEffect} from "react";
 import axios from "axios";
 
-function WeatherModal({isOpen, lat, lon, tempUnits}){
-    
+const Forecast = ({lat, lon, tempUnits}) => {
+
     const regex = /12:00:00/;
 
     let weatherFetchUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=f583d2e3612de8b62a858c176aa37575&units=${tempUnits}`;
@@ -12,7 +13,6 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
         city: "",
         time: "",
         weather: "",
-        maxMin: "",
         temp: "",
         icon: "",
     });
@@ -25,7 +25,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
     });
 
     const iconUrl = `https://openweathermap.org/img/wn/${fetchedData.icon}@2x.png`;
-    const forecastIconUrl = `https://openweathermap.org/img/wn/${fetchedForecastData.forecastIcon}@2x.png`;
+
 
     let threeDayForecast = []; //this array is nesesary to use the map method
 
@@ -66,7 +66,7 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
             console.log(error);
         };
     }, [forecastFetchUrl]);
-    
+
     if(hours < 0){
       hours = (hours + fetchedData.time) * -1;
     };
@@ -99,53 +99,38 @@ function WeatherModal({isOpen, lat, lon, tempUnits}){
         };
     };
 
-    if(!isOpen){ 
-        return <>
-        <div className="modal-wrapper">
-            <div className="current-weather-container">
-                <div className="text-container">
-                    <h2>Please search a city for the weather to show up</h2>
+    if(threeDayForecast[0]){
+        return(
+            <div className={forecastStyles.forecastWrapper}>
+                <div className={forecastStyles.forecastContainer}>
+                    <div className={forecastStyles.currentWeather}>
+                        <h2>current weather in {fetchedData.city}</h2>
+                        <p>{hours}:{utcTimeMinutes}</p>
+                        <div className={forecastStyles.currentWeatherIconAndTempContainer}>
+                            <img src={iconUrl} alt="current weather icon"/>
+                            <h2>{fetchedData.temp}º</h2>
+                        </div>
+                        <p>{fetchedData.weather}</p>
+                    </div>
+                    <div className={`${forecastStyles.futureForecast} ${forecastStyles.day1}`}>
+                        <h2>{threeDayForecast[0].dt_txt.split(regex)}</h2>
+                        <img src={`https://openweathermap.org/img/wn/${threeDayForecast[0].weather[0].icon}@2x.png`} alt=""/>
+                        <h2>{threeDayForecast[0].weather[0].main}</h2>
+                    </div>
+                    <div className={`${forecastStyles.futureForecast} ${forecastStyles.day2}`}>
+                        <h2>{threeDayForecast[1].dt_txt.split(regex)}</h2>
+                        <img src={`https://openweathermap.org/img/wn/${threeDayForecast[1].weather[0].icon}@2x.png`} alt=""/>
+                        <h2>{threeDayForecast[1].weather[0].main}</h2>
+                    </div>
+                    <div className={`${forecastStyles.futureForecast} ${forecastStyles.day3}`}>
+                        <h2>{threeDayForecast[2].dt_txt.split(regex)}</h2>
+                        <img src={`https://openweathermap.org/img/wn/${threeDayForecast[2].weather[0].icon}@2x.png`} alt=""/>
+                        <h2>{threeDayForecast[2].weather[0].main}</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-        </>
-    };
+        )
+    }
+} 
 
-    return( 
-        <>
-        <div className="modal-wrapper">
-            <div className="current-weather-container">
-                <div className="text-container">
-                    <h2>Current weather in: </h2>
-                    <h2>{fetchedData.city} | {`${hours}:${utcTimeMinutes}`}</h2>
-                </div>
-                <div className="icon-and-temp">
-                    <img className="current-icon" src={iconUrl} alt={fetchedData.weather}/>
-                    <h2>{fetchedData.weather} {fetchedData.temp}º</h2>
-                </div>
-            </div>
-            <div className="three-hours-forecast-container">
-                <div className="forecast-icon-and-temp ">
-                    <h2>weather for the next 3 hours</h2>
-                    <img src={forecastIconUrl} alt="weather for the next 3 hours"/>
-                    <h2>{fetchedForecastData.forecastWeather} {fetchedForecastData.maxMin[0]}º max | {fetchedForecastData.maxMin[1]}º min</h2>
-                </div>
-            </div>
-            <div className="three-days-forecast-container">
-                <h2>forecast for the next 3 days</h2>
-                {threeDayForecast.map((renderedWeather, index) => {
-                    return(
-                    (<div className="three-day-forecast-item" key={index}>
-                        <h2>{renderedWeather.dt_txt.split(regex)}</h2>
-                        <img src={`https://openweathermap.org/img/wn/${renderedWeather.weather[0].icon}@2x.png`} alt="forecastA"/>
-                        <h2>{renderedWeather.weather[0].main} {Math.round(renderedWeather.main.temp)}º</h2>
-                    </div>)
-                    )
-                })}
-            </div>
-        </div>
-        </>
-    );
-};
-
-export default WeatherModal;
+export default Forecast;
