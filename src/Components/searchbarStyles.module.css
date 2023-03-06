@@ -1,0 +1,98 @@
+.searchbarWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+    align-items: center;
+    height: 100vh;
+    background-image: url("/clouds.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    .searchbarContainer{
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 0.75fr;
+        align-items: center;
+        justify-items: center;
+        padding: 1em;
+        background-color: #fefffe;
+        border-radius: 5px;
+        box-shadow: 2px 2px 2px 1px hsl(0, 4%, 22%); 
+        font-family: "BIZ UDPGothic", sans-serif;
+        .searchbarAndButtonsContainer{
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .searchButtonContainer{
+            position: absolute;
+        }
+
+        .farenheightButtonContainer{
+            .switchCheckbox{
+                position: relative;
+                appearance: none;
+                width: 4em;
+                height: 2em;
+                background-color: #dcecf2;
+                transition: background 0.3s;
+                cursor: pointer;
+                outline: none;
+            }
+
+            .switchCheckbox::after{
+                position: absolute;
+                content: "";
+                top: 50%;
+                left: 30%;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                transition: left 0.3s;
+                background-color: #fefffe;
+                height: 1.5em;
+                width: 1.5em;
+            }
+
+            .switchCheckbox:checked{
+                background-color: #a4d2fa;
+            }
+
+            .switchCheckbox:checked::after{
+                left: 70%;
+            }
+        }
+
+        & input{
+            font-family: "Roboto", sans-serif;
+            border: 1px solid black;
+            border-radius: 1em;
+            padding: 0.5em;
+        }
+
+        & button{
+            font-family: "Roboto", sans-serif;
+            background-color: #dcecf2;
+            border-radius: 1em;
+            border: none;
+            padding: 0.5em;
+        }
+
+    }
+}
+
+@media(max-width: 480px){
+    .searchbarWrapper{
+        .searchbarContainer{
+            grid-template-columns: 1fr 1fr 0.5fr;
+            gap: .5em;
+            font-size: .75em;
+            .searchbarAndButtonsContainer{
+                & input{
+                    width: 10em;
+                }
+            }
+        }
+    }
+}
+
